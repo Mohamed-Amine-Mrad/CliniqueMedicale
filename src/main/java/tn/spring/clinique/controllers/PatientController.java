@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import tn.spring.clinique.entites.Patient;
 import tn.spring.clinique.service.PatientService;
@@ -16,13 +18,26 @@ public class PatientController {
 
     @GetMapping("/patients")
     public String listPatients(Model model) {
+
         model.addAttribute("patients", patientService.getAllPatients());
+
         return "patients";
     }
 
     @GetMapping("/patient/add")
     public String addPatientForm(Model model) {
+
         model.addAttribute("patient", new Patient());
+
         return "addPatient";
     }
+
+    @PostMapping("/patient/save")
+    public String savePatient(@ModelAttribute Patient patient) {
+
+        patientService.savePatient(patient);
+
+        return "redirect:/patients";
+    }
+
 }
