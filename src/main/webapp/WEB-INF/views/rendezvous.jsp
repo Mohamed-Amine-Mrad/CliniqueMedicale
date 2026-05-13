@@ -23,6 +23,7 @@
         <th>Patient</th>
         <th>Doctor</th>
         <th>Date</th>
+		<th>Reason</th>
         <th>Status</th>
     </tr>
 
@@ -44,6 +45,8 @@
         <td><%= r.getMedecin().getNom() %></td>
 
         <td><%= r.getDateRendezVous() %></td>
+		
+		<td><%= r.getMotif() %></td>
 
         <td><%= r.getStatut() %></td>
 

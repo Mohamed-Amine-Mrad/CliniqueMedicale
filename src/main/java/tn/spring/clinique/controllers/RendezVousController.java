@@ -47,6 +47,7 @@ public class RendezVousController {
             @RequestParam Long patientId,
             @RequestParam Long medecinId,
             @RequestParam String dateRendezVous,
+            @RequestParam String motif,
             Model model) {
 
         Patient patient = patientService.getPatientById(patientId).get();
@@ -56,6 +57,7 @@ public class RendezVousController {
         rendezVous.setPatient(patient);
         rendezVous.setMedecin(medecin);
         rendezVous.setDateRendezVous(LocalDateTime.parse(dateRendezVous));
+        rendezVous.setMotif(motif);
         rendezVous.setStatut("Confirmé");
 
         boolean saved = rendezVousService.saveRendezVous(rendezVous);

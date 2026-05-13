@@ -1,32 +1,31 @@
 package tn.spring.clinique.entites;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 @Entity
 @Data
-public class RendezVous {
+public class Consultation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime dateRendezVous;
+    private LocalDate dateConsultation;
+
+    private String diagnostic;
+
+    private String ordonnance;
     
-    private String motif;
+    private Double prix;
 
-    private String statut;
-
-    @ManyToOne
-    private Patient patient;
-
-    @ManyToOne
-    private Medecin medecin;
+    @OneToOne
+    private RendezVous rendezVous;
 
 }

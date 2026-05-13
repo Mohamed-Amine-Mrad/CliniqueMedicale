@@ -76,6 +76,11 @@
     <input type="datetime-local" name="dateRendezVous">
 
     <br><br>
+	
+	<label>Reason:</label>
+	<input type="text" name="motif">
+
+	<br><br>
 
     <button type="submit">
         Save
