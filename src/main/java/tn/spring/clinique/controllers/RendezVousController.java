@@ -18,6 +18,8 @@ import tn.spring.clinique.entites.Medecin;
 import tn.spring.clinique.entites.Patient;
 import tn.spring.clinique.entites.RendezVous;
 
+import tn.spring.clinique.service.NotificationService;
+
 @Controller
 public class RendezVousController {
 
@@ -29,6 +31,9 @@ public class RendezVousController {
 
     @Autowired
     private MedecinService medecinService;
+    
+    @Autowired
+    private NotificationService notificationService;
 
     @GetMapping("/rendezvous")
     public String listRendezVous(Model model) {
@@ -61,6 +66,10 @@ public class RendezVousController {
         rendezVous.setStatut("Confirmé");
 
         boolean saved = rendezVousService.saveRendezVous(rendezVous);
+        
+        if (saved) {
+            notificationService.createNotification(rendezVous);
+        }
 
         if (!saved) {
             model.addAttribute("error", "This doctor is not available at this date and time.");
