@@ -72,7 +72,7 @@ public class RendezVousController {
         }
 
         if (!saved) {
-            model.addAttribute("error", "This doctor is not available at this date and time.");
+            model.addAttribute("error", "This doctor already has an appointment within one hour of this time.");
             model.addAttribute("patients", patientService.getAllPatients());
             model.addAttribute("medecins", medecinService.getAllMedecins());
             return "addRendezVous";

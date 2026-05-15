@@ -18,12 +18,18 @@ public class RendezVousService {
     // Save appointment
     public boolean saveRendezVous(RendezVous rendezVous) {
 
-        boolean exists = rendezVousRepository
-                .existsByMedecinIdAndDateRendezVous(
-                        rendezVous.getMedecin().getId(),
-                        rendezVous.getDateRendezVous());
+        LocalDateTime requestedDate = rendezVous.getDateRendezVous();
 
-        if (exists) {
+        LocalDateTime start = requestedDate.minusHours(1);
+        LocalDateTime end = requestedDate.plusHours(1);
+
+        List<RendezVous> conflicts =
+                rendezVousRepository.findByMedecinIdAndDateRendezVousBetween(
+                        rendezVous.getMedecin().getId(),
+                        start,
+                        end);
+
+        if (!conflicts.isEmpty()) {
             return false;
         }
 
