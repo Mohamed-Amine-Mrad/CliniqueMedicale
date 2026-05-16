@@ -1,0 +1,149 @@
+.page-header {
+  margin-bottom: 30px;
+}
+
+.page-header h1 {
+  font-size: 38px;
+  margin: 0;
+  font-weight: 800;
+}
+
+.page-header p {
+  margin-top: 10px;
+  color: #64748b;
+  font-size: 18px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 26px;
+}
+
+.stat-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 22px;
+  padding: 28px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.stat-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.stat-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 25px;
+}
+
+.blue { background: #2563eb; }
+.teal { background: #0d9488; }
+.cyan { background: #06b6d4; }
+.green { background: #10b981; }
+
+.stat-card h2 {
+  font-size: 36px;
+  margin: 26px 0 8px;
+}
+
+.stat-card p {
+  color: #64748b;
+  margin: 0;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+  margin-top: 32px;
+}
+
+.panel {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 22px;
+  padding: 28px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.panel h2 {
+  margin-top: 0;
+}
+
+.chart-box {
+  height: 250px;
+  border-left: 2px solid #94a3b8;
+  border-bottom: 2px solid #94a3b8;
+  margin: 30px 15px 0;
+  position: relative;
+  background-image:
+    linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+    linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
+  background-size: 70px 50px;
+}
+
+.fake-line {
+  position: absolute;
+  left: 20px;
+  bottom: 85px;
+  width: 85%;
+  height: 85px;
+  border-top: 4px solid #0d9488;
+  border-radius: 50%;
+  transform: rotate(-5deg);
+}
+
+.bar-chart {
+  height: 250px;
+  display: flex;
+  align-items: end;
+  gap: 22px;
+  padding: 20px;
+  border-left: 2px solid #94a3b8;
+  border-bottom: 2px solid #94a3b8;
+}
+
+.bar {
+  width: 52px;
+  background: #10b981;
+  border-radius: 12px 12px 0 0;
+}
+
+.table-panel {
+  margin-top: 32px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.table-panel h2 {
+  padding: 28px;
+  margin: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  padding: 18px 28px;
+  color: #64748b;
+  background: #f8fafc;
+}
+
+td {
+  padding: 18px 28px;
+  border-top: 1px solid #e2e8f0;
+}

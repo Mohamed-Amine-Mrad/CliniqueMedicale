@@ -1,0 +1,51 @@
+<div class="page-header">
+  <div>
+    <h1>Patient Details</h1>
+    <p>View complete patient information</p>
+  </div>
+
+  <button class="back-btn" routerLink="/patients">
+    ← Back
+  </button>
+</div>
+
+<div class="details-card" *ngIf="patient() as p">
+
+  <div class="profile-section">
+
+    <div class="avatar-large">
+      {{ p.nom.charAt(0) }}
+    </div>
+
+    <div>
+      <h2>{{ p.nom }}</h2>
+      <p>Patient Medical Profile</p>
+    </div>
+
+  </div>
+
+  <div class="details-grid">
+
+    <div class="detail-item">
+      <label>Medical Record</label>
+      <span>{{ p.dossierMedical }}</span>
+    </div>
+
+    <div class="detail-item">
+      <label>Date of Birth</label>
+      <span>{{ p.dateNaissance }}</span>
+    </div>
+
+    <div class="detail-item">
+      <label>Phone Number</label>
+      <span>{{ p.tel }}</span>
+    </div>
+
+    <div class="detail-item">
+      <label>Status</label>
+      <span class="status-badge">Active</span>
+    </div>
+
+  </div>
+
+</div>

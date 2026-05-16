@@ -1,0 +1,55 @@
+<div class="page-header">
+  <div>
+    <h1>Edit Patient</h1>
+    <p>Update patient information</p>
+  </div>
+
+  <button class="back-btn" routerLink="/patients">
+    ← Back
+  </button>
+</div>
+
+<div class="form-card">
+
+  <form (ngSubmit)="updatePatient()">
+
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text"
+             [ngModel]="patient().nom"
+             (ngModelChange)="updateField('nom', $event)"
+             name="nom">
+    </div>
+
+    <div class="form-group">
+      <label>Medical Record</label>
+      <input type="text"
+             [ngModel]="patient().dossierMedical"
+             (ngModelChange)="updateField('dossierMedical', $event)"
+             name="dossierMedical">
+    </div>
+
+    <div class="form-group">
+      <label>Date of Birth</label>
+      <input type="date"
+             [ngModel]="patient().dateNaissance"
+             (ngModelChange)="updateField('dateNaissance', $event)"
+             name="dateNaissance">
+    </div>
+
+    <div class="form-group">
+      <label>Phone Number</label>
+      <input type="text"
+             [ngModel]="patient().tel"
+             (ngModelChange)="updateField('tel', $event)"
+             name="tel">
+    </div>
+
+    <div class="form-actions">
+      <button class="save-btn" type="submit">Update Patient</button>
+      <button class="cancel-btn" type="button" routerLink="/patients">Cancel</button>
+    </div>
+
+  </form>
+  
+</div>
