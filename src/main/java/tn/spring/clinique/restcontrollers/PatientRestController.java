@@ -25,8 +25,8 @@ public class PatientRestController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Patient> getPatientById(@PathVariable Long id) {
-        return patientService.getPatientById(id);
+    public Patient getPatientById(@PathVariable Long id) {
+        return patientService.getPatientById(id).get();
     }
 
     @PostMapping
