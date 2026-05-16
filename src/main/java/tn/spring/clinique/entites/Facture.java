@@ -7,7 +7,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Data
@@ -17,12 +23,16 @@ public class Facture {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "La date facture est obligatoire")
     private LocalDate dateFacture;
 
+    @Positive(message = "Le montant doit etre positif")
     private Double montant;
 
+    @NotBlank(message = "Le statut paiement est obligatoire")
     private String statutPaiement;
 
+    @JsonIgnore
     @OneToOne
     private Consultation consultation;
 

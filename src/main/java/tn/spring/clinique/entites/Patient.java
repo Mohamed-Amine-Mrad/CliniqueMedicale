@@ -2,12 +2,14 @@ package tn.spring.clinique.entites;
 
 import java.time.LocalDate;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Past;
 import lombok.Data;
 
 @Entity
@@ -24,6 +26,7 @@ public class Patient {
     @NotEmpty(message = "Le dossier medical est obligatoire")
     private String dossierMedical;
 
+    @Past(message = "La date doit etre dans le passe")
     private LocalDate dateNaissance;
 
     @Size(min = 8, max = 8, message = "Le numero doit contenir 8 chiffres")

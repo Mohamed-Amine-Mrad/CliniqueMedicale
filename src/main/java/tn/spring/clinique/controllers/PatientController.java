@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import tn.spring.clinique.entites.Patient;
 import tn.spring.clinique.service.PatientService;
 
+import org.springframework.web.bind.annotation.PathVariable;
+
 @Controller
 public class PatientController {
 
@@ -36,6 +38,14 @@ public class PatientController {
     public String savePatient(@ModelAttribute Patient patient) {
 
         patientService.savePatient(patient);
+
+        return "redirect:/patients";
+    }
+    
+    @GetMapping("/patient/delete/{id}")
+    public String deletePatient(@PathVariable Long id) {
+
+        patientService.deletePatient(id);
 
         return "redirect:/patients";
     }
