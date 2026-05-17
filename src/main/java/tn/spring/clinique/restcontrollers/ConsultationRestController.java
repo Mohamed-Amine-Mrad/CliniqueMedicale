@@ -16,6 +16,7 @@ import tn.spring.clinique.service.FactureService;
 import tn.spring.clinique.service.RendezVousService;
 
 import tn.spring.clinique.dto.ApiResponse;
+import tn.spring.clinique.dto.ConsultationResponse;
 
 @RestController
 @RequestMapping("/api/consultations")
@@ -32,8 +33,38 @@ public class ConsultationRestController {
     private FactureService factureService;
 
     @GetMapping
-    public List<Consultation> getAllConsultations() {
-        return consultationService.getAllConsultations();
+    public List<ConsultationResponse> getAllConsultations() {
+
+        return consultationService
+                .getAllConsultations()
+                .stream()
+                .map(c -> new ConsultationResponse(
+
+                        c.getId(),
+
+                        c.getDateConsultation(),
+
+                        c.getDiagnostic(),
+
+                        c.getOrdonnance(),
+
+                        c.getPrix(),
+
+                        c.getRendezVous().getId(),
+
+                        c.getRendezVous()
+                                .getPatient()
+                                .getNom(),
+
+                        c.getRendezVous()
+                                .getMedecin()
+                                .getNom(),
+
+                        c.getRendezVous()
+                                .getDateRendezVous()
+                                .toString()
+                ))
+                .toList();
     }
 
     @PostMapping
@@ -74,5 +105,56 @@ public class ConsultationRestController {
         factureService.saveFacture(facture);
 
         return new ApiResponse(true, "Consultation and invoice created successfully.");
+    }
+    
+    @GetMapping("/{id}")
+    public ConsultationResponse getConsultationById(@PathVariable Long id) {
+
+        Consultation c = consultationService
+                .getConsultationById(id)
+                .get();
+
+        return new ConsultationResponse(
+                c.getId(),
+                c.getDateConsultation(),
+                c.getDiagnostic(),
+                c.getOrdonnance(),
+                c.getPrix(),
+                c.getRendezVous().getId(),
+                c.getRendezVous().getPatient().getNom(),
+                c.getRendezVous().getMedecin().getNom(),
+                c.getRendezVous().getDateRendezVous().toString()
+        );
+    }
+    
+    @PutMapping("/{id}")
+    public ApiResponse updateConsultation(
+            @PathVariable Long id,
+            @RequestBody ConsultationRequest request) {
+
+        Consultation existing =
+                consultationService.getConsultationById(id).get();
+
+        existing.setDiagnostic(request.getDiagnostic());
+        existing.setOrdonnance(request.getOrdonnance());
+        existing.setPrix(request.getPrix());
+
+        consultationService.updateConsultation(existing);
+
+        return new ApiResponse(
+                true,
+                "Consultation updated successfully."
+        );
+    }
+    
+    @DeleteMapping("/{id}")
+    public ApiResponse deleteConsultation(@PathVariable Long id) {
+
+        consultationService.deleteConsultation(id);
+
+        return new ApiResponse(
+                true,
+                "Consultation deleted successfully."
+        );
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import tn.spring.clinique.entites.RendezVous;
 import tn.spring.clinique.repositories.RendezVousRepository;
+import java.util.Optional;
 
 @Service
 public class RendezVousService {
@@ -41,6 +42,18 @@ public class RendezVousService {
     // Get all appointments
     public List<RendezVous> getAllRendezVous() {
         return rendezVousRepository.findAll();
+    }
+    
+    public Optional<RendezVous> getRendezVousById(Long id) {
+        return rendezVousRepository.findById(id);
+    }
+
+    public void deleteRendezVous(Long id) {
+        rendezVousRepository.deleteById(id);
+    }
+    
+    public RendezVous updateRendezVous(RendezVous rendezVous) {
+        return rendezVousRepository.save(rendezVous);
     }
 
 }

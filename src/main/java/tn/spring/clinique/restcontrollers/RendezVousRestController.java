@@ -17,6 +17,9 @@ import tn.spring.clinique.service.PatientService;
 import tn.spring.clinique.service.RendezVousService;
 
 import tn.spring.clinique.dto.ApiResponse;
+import tn.spring.clinique.dto.RendezVousResponse;
+import tn.spring.clinique.repositories.ConsultationRepository;
+import tn.spring.clinique.service.ConsultationService;
 
 @RestController
 @RequestMapping("/api/rendezvous")
@@ -34,10 +37,30 @@ public class RendezVousRestController {
 
     @Autowired
     private NotificationService notificationService;
+    
+    @Autowired
+    private ConsultationRepository consultationRepository;
+    
+    @Autowired
+    private ConsultationService consultationService;
 
     @GetMapping
-    public List<RendezVous> getAllRendezVous() {
-        return rendezVousService.getAllRendezVous();
+    public List<RendezVousResponse> getAllRendezVous() {
+
+        return rendezVousService.getAllRendezVous()
+                .stream()
+                .map(r -> new RendezVousResponse(
+                        r.getId(),
+                        r.getDateRendezVous(),
+                        r.getMotif(),
+                        r.getStatut(),
+                        r.getPatient().getId(),
+                        r.getPatient().getNom(),
+                        r.getMedecin().getId(),
+                        r.getMedecin().getNom(),
+                        r.getMedecin().getSpecialite()
+                ))
+                .toList();
     }
 
     @PostMapping
@@ -63,5 +86,89 @@ public class RendezVousRestController {
         notificationService.createNotification(rendezVous);
 
         return new ApiResponse(true, "Appointment created successfully.");
+    }
+    @GetMapping("/{id}")
+    public RendezVousResponse getRendezVousById(@PathVariable Long id) {
+
+        RendezVous r = rendezVousService.getRendezVousById(id).get();
+
+        return new RendezVousResponse(
+                r.getId(),
+                r.getDateRendezVous(),
+                r.getMotif(),
+                r.getStatut(),
+                r.getPatient().getId(),
+                r.getPatient().getNom(),
+                r.getMedecin().getId(),
+                r.getMedecin().getNom(),
+                r.getMedecin().getSpecialite()
+        );
+    }
+
+    @DeleteMapping("/{id}")
+    public ApiResponse deleteRendezVous(@PathVariable Long id) {
+
+        if (consultationRepository.existsByRendezVousId(id)) {
+            return new ApiResponse(
+                    false,
+                    "Cannot delete appointment because it already has a consultation."
+            );
+        }
+
+        rendezVousService.deleteRendezVous(id);
+
+        return new ApiResponse(
+                true,
+                "Appointment deleted successfully."
+        );
+    }
+    
+    @PutMapping("/{id}")
+    public ApiResponse updateRendezVous(
+            @PathVariable Long id,
+            @RequestBody RendezVousRequest request) {
+
+        RendezVous existing =
+                rendezVousService.getRendezVousById(id).get();
+
+        Patient patient =
+                patientService.getPatientById(request.getPatientId()).get();
+
+        Medecin medecin =
+                medecinService.getMedecinById(request.getMedecinId()).get();
+
+        existing.setPatient(patient);
+        existing.setMedecin(medecin);
+        existing.setDateRendezVous(
+                LocalDateTime.parse(request.getDateRendezVous()));
+        existing.setMotif(request.getMotif());
+        existing.setStatut("CONFIRMED");
+
+        rendezVousService.updateRendezVous(existing);
+
+        return new ApiResponse(
+                true,
+                "Appointment updated successfully."
+        );
+    }
+    
+    @GetMapping("/available-for-consultation")
+    public List<RendezVousResponse> getAvailableRendezVousForConsultation() {
+
+        return consultationService
+                .getAvailableRendezVous()
+                .stream()
+                .map(r -> new RendezVousResponse(
+                        r.getId(),
+                        r.getDateRendezVous(),
+                        r.getMotif(),
+                        r.getStatut(),
+                        r.getPatient().getId(),
+                        r.getPatient().getNom(),
+                        r.getMedecin().getId(),
+                        r.getMedecin().getNom(),
+                        r.getMedecin().getSpecialite()
+                ))
+                .toList();
     }
 }

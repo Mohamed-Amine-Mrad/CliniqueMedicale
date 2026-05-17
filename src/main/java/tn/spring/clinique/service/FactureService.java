@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import tn.spring.clinique.entites.Facture;
 import tn.spring.clinique.repositories.FactureRepository;
+import java.util.Optional;
 
 @Service
 public class FactureService {
@@ -22,6 +23,18 @@ public class FactureService {
     // Get all invoices
     public List<Facture> getAllFactures() {
         return factureRepository.findAll();
+    }
+    
+    public Optional<Facture> getFactureById(Long id) {
+        return factureRepository.findById(id);
+    }
+
+    public Facture updateFacture(Facture facture) {
+        return factureRepository.save(facture);
+    }
+    
+    public void deleteFacture(Long id) {
+        factureRepository.deleteById(id);
     }
 
 }

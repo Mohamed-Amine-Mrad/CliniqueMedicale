@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 import tn.spring.clinique.entites.RendezVous;
 import tn.spring.clinique.service.RendezVousService;
+import java.util.Optional;
 
 @Service
 public class ConsultationService {
@@ -26,6 +27,10 @@ public class ConsultationService {
     public void saveConsultation(Consultation consultation) {
         consultationRepository.save(consultation);
     }
+    
+    public void deleteConsultation(Long id) {
+        consultationRepository.deleteById(id);
+    }
 
     // Get all consultations
     public List<Consultation> getAllConsultations() {
@@ -39,6 +44,14 @@ public class ConsultationService {
                 .filter(r ->
                     !consultationRepository.existsByRendezVousId(r.getId()))
                 .collect(Collectors.toList());
+    }
+    
+    public Optional<Consultation> getConsultationById(Long id) {
+        return consultationRepository.findById(id);
+    }
+    
+    public Consultation updateConsultation(Consultation consultation) {
+        return consultationRepository.save(consultation);
     }
 
 }
