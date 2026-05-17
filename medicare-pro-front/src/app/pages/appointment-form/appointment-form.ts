@@ -105,7 +105,15 @@ export class AppointmentForm implements OnInit {
     };
 
     this.appointmentService.addAppointment(appointmentData).subscribe({
-      next: () => {
+      next: (response: any) => {
+        if (response === false || response.success === false) {
+          this.errorMessage.set(
+            response.message ||
+              'Appointment cannot be created. Please check doctor availability or appointment date.',
+          );
+          return;
+        }
+
         this.notificationService.showToast('New appointment created successfully.');
 
         this.router.navigate(['/appointments']);
@@ -114,7 +122,9 @@ export class AppointmentForm implements OnInit {
       error: (err) => {
         console.error(err);
 
-        this.errorMessage.set('Appointment date must be today or in the future.');
+        this.errorMessage.set(
+          'Appointment date must be today or in the future, and the doctor must be available.',
+        );
       },
     });
   }

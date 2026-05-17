@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+
+  mysql:
+    image: mysql:8
+    container_name: clinique-mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: clinique_db
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    volumes:
+      - clinique_mysql_data:/var/lib/mysql
+
+  backend:
+    image: clinique-backend
+    container_name: clinique-backend
+    restart: on-failure
+    depends_on:
+      - mysql
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/clinique_db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+
+  frontend:
+    image: clinique-frontend
+    container_name: clinique-frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "4200:80"
+
+volumes:
+  clinique_mysql_data:
