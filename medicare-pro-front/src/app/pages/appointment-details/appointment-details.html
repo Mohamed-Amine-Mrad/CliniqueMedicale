@@ -1,0 +1,45 @@
+<div class="page-header">
+
+  <div>
+    <h1>Appointment Details</h1>
+    <p>View appointment information and status</p>
+  </div>
+
+  <button class="back-btn" routerLink="/appointments">
+    ← Back
+  </button>
+
+</div>
+
+<div class="details-card" *ngIf="appointment() as a">
+
+  <div class="details-grid">
+
+    <div class="detail-item">
+      <label>Patient</label>
+      <span>{{ a.patientNom }}</span>
+    </div>
+
+    <div class="detail-item">
+      <label>Doctor</label>
+      <span>Dr. {{ a.medecinNom }} - {{ a.medecinSpecialite }}</span>
+    </div>
+
+    <div class="detail-item">
+      <label>Date & Time</label>
+      <span>{{ a.dateRendezVous }}</span>
+    </div>
+
+    <div class="detail-item">
+      <label>Reason</label>
+      <span>{{ a.motif }}</span>
+    </div>
+
+    <div class="detail-item">
+      <label>Status</label>
+      <span class="status-badge">{{ a.statut }}</span>
+    </div>
+
+  </div>
+
+</div>

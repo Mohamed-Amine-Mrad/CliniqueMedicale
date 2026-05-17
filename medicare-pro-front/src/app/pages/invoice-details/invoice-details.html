@@ -1,0 +1,122 @@
+<div class="invoice-page" *ngIf="invoice() as i">
+
+  <div class="top-actions">
+
+    <button class="back-btn" routerLink="/invoices">
+      ← Back
+    </button>
+
+    <button class="print-btn" onclick="window.print()">
+      🖨 Print Invoice
+    </button>
+
+  </div>
+
+  <div class="invoice-card">
+
+    <div class="invoice-header">
+
+      <div>
+        <h1>Clinique Medicale</h1>
+        <p>Nabeul , ITBS</p>
+        <p>+216 00 000 000</p>
+      </div>
+
+      <div class="invoice-meta">
+        <h2>FACTURE</h2>
+
+        <p>
+          <strong>Invoice #</strong>
+          {{ i.id }}
+        </p>
+
+        <p>
+          <strong>Date :</strong>
+          {{ i.dateFacture }}
+        </p>
+
+        <span
+          class="status-badge"
+          [class.paid]="i.statutPaiement === 'Payee'"
+          [class.unpaid]="i.statutPaiement !== 'Payee'">
+
+          {{ i.statutPaiement }}
+
+        </span>
+
+      </div>
+
+    </div>
+
+    <div class="section">
+
+      <h3>Patient Information</h3>
+
+      <p>
+        <strong>Patient :</strong>
+        {{ i.patientNom }}
+      </p>
+
+      <p>
+        <strong>Doctor :</strong>
+        Dr. {{ i.medecinNom }}
+      </p>
+
+    </div>
+
+    <div class="section">
+
+      <h3>Consultation Information</h3>
+
+      <p>
+        <strong>Diagnostic :</strong>
+        {{ i.diagnostic }}
+      </p>
+
+      <p>
+        <strong>Ordonnance :</strong>
+        {{ i.ordonnance }}
+      </p>
+
+    </div>
+
+    <table class="invoice-table">
+
+      <thead>
+
+        <tr>
+          <th>Description</th>
+          <th>Amount</th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>Medical Consultation</td>
+          <td>{{ i.montant }} DT</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+    <div class="invoice-total">
+
+      <h2>
+        Total :
+        {{ i.montant }} DT
+      </h2>
+
+    </div>
+
+    <div class="footer-note">
+
+      Thank you for choosing our clinic.
+
+    </div>
+
+  </div>
+
+</div>

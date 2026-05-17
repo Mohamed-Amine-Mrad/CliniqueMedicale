@@ -1,0 +1,70 @@
+<div class="page-header">
+
+  <div>
+    <h1>Edit Consultation</h1>
+    <p>Update consultation information</p>
+  </div>
+
+  <button class="back-btn" routerLink="/consultations">
+    ← Back
+  </button>
+
+</div>
+
+<div class="form-card">
+
+  <form (ngSubmit)="updateConsultation()">
+
+    <div class="form-group">
+      <label>Diagnostic</label>
+
+      <input
+        type="text"
+        [ngModel]="consultation().diagnostic"
+        (ngModelChange)="updateField('diagnostic', $event)"
+        name="diagnostic">
+    </div>
+
+    <div class="form-group">
+      <label>Ordonnance</label>
+
+      <input
+        type="text"
+        [ngModel]="consultation().ordonnance"
+        (ngModelChange)="updateField('ordonnance', $event)"
+        name="ordonnance">
+    </div>
+
+    <div class="form-group">
+      <label>Price</label>
+
+      <input
+        type="number"
+        [ngModel]="consultation().prix"
+        (ngModelChange)="updateField('prix', $event)"
+        name="prix">
+    </div>
+
+    <p class="error-message" *ngIf="errorMessage()">
+      {{ errorMessage() }}
+    </p>
+
+    <div class="form-actions">
+
+      <button class="save-btn" type="submit">
+        Update Consultation
+      </button>
+
+      <button
+        class="cancel-btn"
+        type="button"
+        routerLink="/consultations">
+
+        Cancel
+      </button>
+
+    </div>
+
+  </form>
+
+</div>

@@ -1,0 +1,17 @@
+<div
+  class="toast"
+  *ngIf="notificationService.toastMessage()">
+
+  <div class="toast-icon">
+    🔔
+  </div>
+
+  <div>
+    <h4>Notification</h4>
+
+    <p>
+      {{ notificationService.toastMessage() }}
+    </p>
+  </div>
+
+</div>

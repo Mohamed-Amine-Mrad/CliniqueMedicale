@@ -8,7 +8,15 @@
 </div>
 
 <div class="table-panel">
-  <div class="search-box">🔍 Search patients by name, phone, or medical record...</div>
+  <div class="search-box">
+    <span>🔍</span>
+    <input
+      type="text"
+      placeholder="Search patients by name, phone, or medical record..."
+      [ngModel]="searchText()"
+      (ngModelChange)="updateSearch($event)"
+    />
+  </div>
 
   <table>
     <thead>
@@ -22,7 +30,7 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let patient of patients()">
+      <tr *ngFor="let patient of filteredPatients()">
         <td>
           <div class="patient-cell">
             <div class="avatar">

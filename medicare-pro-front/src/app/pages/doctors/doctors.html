@@ -1,1 +1,85 @@
-<p>doctors works!</p>
+<div class="page-header">
+  <div>
+    <h1>Doctors Management</h1>
+    <p>Manage and monitor clinic doctors</p>
+  </div>
+
+  <button class="add-btn" routerLink="/doctors/add">+ Add New Doctor</button>
+</div>
+
+<div class="table-panel">
+  <div class="search-box">
+    <span>🔍</span>
+    <input
+      type="text"
+      placeholder="Search doctors by name or specialty..."
+      [ngModel]="searchText()"
+      (ngModelChange)="updateSearch($event)"
+    />
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Doctor</th>
+        <th>Specialty</th>
+        <th>Availability</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let doctor of filteredDoctors()">
+        <td>
+          <div class="doctor-cell">
+            <div class="avatar">
+              {{ doctor.nom.charAt(0) }}
+            </div>
+
+            <span> Dr. {{ doctor.nom }} </span>
+          </div>
+        </td>
+
+        <td>
+          {{ doctor.specialite }}
+        </td>
+
+        <td>
+          <span
+            class="status-badge"
+            [class.available]="doctor.disponibilite"
+            [class.unavailable]="!doctor.disponibilite"
+          >
+            {{ doctor.disponibilite ? 'Available' : 'Unavailable' }}
+          </span>
+        </td>
+
+        <td class="actions">
+          <button class="icon-btn view" [routerLink]="['/doctors/details', doctor.id]">👁</button>
+
+          <button class="icon-btn edit" [routerLink]="['/doctors/edit', doctor.id]">✏️</button>
+
+          <button class="icon-btn delete" (click)="openDeleteModal(doctor.id!)">🗑</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="modal-backdrop" *ngIf="showDeleteModal()">
+    <div class="modal-box">
+      <div class="modal-icon">🗑</div>
+
+      <h2>Delete Doctor?</h2>
+
+      <p>
+        This action will permanently remove this doctor from the system. Are you sure you want to
+        continue?
+      </p>
+
+      <div class="modal-actions">
+        <button class="cancel-btn" (click)="closeDeleteModal()">Cancel</button>
+        <button class="danger-btn" (click)="confirmDelete()">Delete Doctor</button>
+      </div>
+    </div>
+  </div>
+</div>

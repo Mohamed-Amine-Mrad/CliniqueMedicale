@@ -1,0 +1,76 @@
+.page-header {
+  margin-bottom: 28px;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 800;
+}
+
+.page-header p {
+  color: #64748b;
+  margin-top: 10px;
+}
+
+.search-box {
+  margin-bottom: 28px;
+  padding: 0 18px;
+  border: 1px solid #dbe4ef;
+  border-radius: 16px;
+  background: white;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-box input {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 18px 0;
+  font-size: 16px;
+  color: #334155;
+}
+
+.notifications-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.notification-card {
+  display: flex;
+  gap: 18px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.notification-icon {
+  width: 54px;
+  height: 54px;
+  background: #ccfbf1;
+  color: #0d9488;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.notification-card h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.notification-card p {
+  color: #334155;
+  margin: 8px 0;
+}
+
+.notification-card span {
+  color: #64748b;
+  font-size: 14px;
+}

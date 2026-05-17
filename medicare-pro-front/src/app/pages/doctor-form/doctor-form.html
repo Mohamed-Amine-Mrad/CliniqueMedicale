@@ -1,0 +1,76 @@
+<div class="page-header">
+
+  <div>
+    <h1>Add New Doctor</h1>
+    <p>Create a new doctor profile</p>
+  </div>
+
+  <button class="back-btn" routerLink="/doctors">
+    ← Back
+  </button>
+
+</div>
+
+<div class="form-card">
+
+  <form (ngSubmit)="saveDoctor()">
+
+    <div class="form-group">
+      <label>Doctor Name</label>
+
+      <input
+        type="text"
+        [(ngModel)]="doctor.nom"
+        name="nom"
+        placeholder="Enter doctor full name">
+    </div>
+
+    <div class="form-group">
+      <label>Specialty</label>
+
+      <input
+        type="text"
+        [(ngModel)]="doctor.specialite"
+        name="specialite"
+        placeholder="Cardiology, Neurology...">
+    </div>
+
+    <div class="form-group">
+
+      <label>Availability</label>
+
+      <select
+        [(ngModel)]="doctor.disponibilite"
+        name="disponibilite">
+
+        <option [ngValue]="true">
+          Available
+        </option>
+
+        <option [ngValue]="false">
+          Unavailable
+        </option>
+
+      </select>
+
+    </div>
+
+    <div class="form-actions">
+
+      <button class="save-btn" type="submit">
+        Save Doctor
+      </button>
+
+      <button
+        class="cancel-btn"
+        type="button"
+        routerLink="/doctors">
+
+        Cancel
+      </button>
+
+    </div>
+
+  </form>
+
+</div>

@@ -1,1 +1,84 @@
-<p>appointments works!</p>
+<div class="page-header">
+  <div>
+    <h1>Appointments Management</h1>
+    <p>Manage patient appointments and doctor availability</p>
+  </div>
+
+  <button class="add-btn" routerLink="/appointments/add">+ Add Appointment</button>
+</div>
+
+<div class="table-panel">
+  <div class="search-box">
+    <span>🔍</span>
+    <input
+      type="text"
+      placeholder="Search by patient, doctor, reason, or status..."
+      [ngModel]="searchText()"
+      (ngModelChange)="updateSearch($event)"
+    />
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Patient</th>
+        <th>Doctor</th>
+        <th>Date & Time</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let appointment of filteredAppointments()">
+        <td>{{ appointment.patientNom }}</td>
+
+        <td>
+          Dr. {{ appointment.medecinNom }}
+          <br />
+          <small>{{ appointment.medecinSpecialite }}</small>
+        </td>
+
+        <td>{{ appointment.dateRendezVous }}</td>
+
+        <td>{{ appointment.motif }}</td>
+
+        <td>
+          <span class="status-badge">
+            {{ appointment.statut }}
+          </span>
+        </td>
+        <td class="actions">
+          <button class="icon-btn view" [routerLink]="['/appointments/details', appointment.id]">
+            👁
+          </button>
+          <button class="icon-btn edit" [routerLink]="['/appointments/edit', appointment.id]">
+            ✏️
+          </button>
+
+          <button class="icon-btn delete" (click)="openDeleteModal(appointment.id!)">🗑</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="modal-backdrop" *ngIf="showDeleteModal()">
+    <div class="modal-box">
+      <div class="modal-icon">🗑</div>
+
+      <h2>Delete Appointment?</h2>
+
+      <p>This action will remove this appointment if it is not linked to a consultation.</p>
+
+      <p class="error-message" *ngIf="errorMessage()">
+        {{ errorMessage() }}
+      </p>
+
+      <div class="modal-actions">
+        <button class="cancel-btn" (click)="closeDeleteModal()">Cancel</button>
+        <button class="danger-btn" (click)="confirmDelete()">Delete Appointment</button>
+      </div>
+    </div>
+  </div>
+</div>

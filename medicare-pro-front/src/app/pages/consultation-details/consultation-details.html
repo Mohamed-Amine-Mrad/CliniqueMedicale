@@ -1,0 +1,55 @@
+<div class="page-header">
+
+  <div>
+    <h1>Consultation Details</h1>
+    <p>View consultation information</p>
+  </div>
+
+  <button class="back-btn" routerLink="/consultations">
+    ← Back
+  </button>
+
+</div>
+
+<div class="details-card" *ngIf="consultation() as c">
+
+  <div class="details-grid">
+
+    <div class="detail-item">
+      <label>Date Consultation</label>
+      <span>{{ c.dateConsultation }}</span>
+    </div>
+
+    <div class="detail-item">
+      <label>Patient</label>
+      <span>{{ c.patientNom }}</span>
+    </div>
+
+    <div class="detail-item">
+      <label>Doctor</label>
+      <span>Dr. {{ c.medecinNom }}</span>
+    </div>
+
+    <div class="detail-item">
+      <label>Appointment ID</label>
+      <span>#{{ c.rendezVousId }}</span>
+    </div>
+
+    <div class="detail-item">
+      <label>Diagnostic</label>
+      <span>{{ c.diagnostic }}</span>
+    </div>
+
+    <div class="detail-item">
+      <label>Ordonnance</label>
+      <span>{{ c.ordonnance }}</span>
+    </div>
+
+    <div class="detail-item">
+      <label>Price</label>
+      <span>{{ c.prix }} DT</span>
+    </div>
+
+  </div>
+
+</div>

@@ -76,12 +76,26 @@ td {
 
 .search-box {
   margin: 26px;
-  padding: 18px 22px;
+  padding: 0 18px;
   border: 1px solid #dbe4ef;
   border-radius: 16px;
-  color: #64748b;
   background: white;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-box input {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 18px 0;
   font-size: 16px;
+  color: #334155;
+}
+
+.search-box input::placeholder {
+  color: #94a3b8;
 }
 
 .actions {

@@ -12,7 +12,7 @@
       <div class="stat-icon blue">👥</div>
       <span>Patients</span>
     </div>
-    <h2>0</h2>
+    <h2>{{ totalPatients() }}</h2>
     <p>Total Patients</p>
   </div>
 
@@ -21,7 +21,7 @@
       <div class="stat-icon teal">🩺</div>
       <span>Doctors</span>
     </div>
-    <h2>0</h2>
+    <h2>{{ totalDoctors() }}</h2>
     <p>Total Doctors</p>
   </div>
 
@@ -30,7 +30,7 @@
       <div class="stat-icon cyan">📅</div>
       <span>Appointments</span>
     </div>
-    <h2>0</h2>
+    <h2>{{ totalAppointments() }}</h2>
     <p>Total Appointments</p>
   </div>
 
@@ -39,7 +39,7 @@
       <div class="stat-icon green">💰</div>
       <span>Revenue</span>
     </div>
-    <h2>0 DT</h2>
+    <h2>{{ totalRevenue() }} DT</h2>
     <p>Total Revenue</p>
   </div>
 
@@ -48,22 +48,15 @@
 <div class="dashboard-grid">
 
   <div class="panel">
-    <h2>Patient Growth</h2>
-    <div class="chart-box">
-      <div class="fake-line"></div>
-    </div>
+    <h2>Consultations</h2>
+    <div class="big-number">{{ totalConsultations() }}</div>
+    <p>Total completed consultations</p>
   </div>
 
   <div class="panel">
-    <h2>Revenue Overview</h2>
-    <div class="bar-chart">
-      <div class="bar" style="height: 120px;"></div>
-      <div class="bar" style="height: 160px;"></div>
-      <div class="bar" style="height: 190px;"></div>
-      <div class="bar" style="height: 150px;"></div>
-      <div class="bar" style="height: 210px;"></div>
-      <div class="bar" style="height: 230px;"></div>
-    </div>
+    <h2>Notifications</h2>
+    <div class="big-number">{{ totalNotifications() }}</div>
+    <p>Saved appointment reminders</p>
   </div>
 
 </div>
@@ -83,8 +76,16 @@
     </thead>
 
     <tbody>
-      <tr>
-        <td colspan="5">No appointments loaded yet.</td>
+      <tr *ngFor="let appointment of recentAppointments()">
+        <td>{{ appointment.patientNom }}</td>
+        <td>Dr. {{ appointment.medecinNom }}</td>
+        <td>{{ appointment.dateRendezVous }}</td>
+        <td>{{ appointment.motif }}</td>
+        <td>{{ appointment.statut }}</td>
+      </tr>
+
+      <tr *ngIf="recentAppointments().length === 0">
+        <td colspan="5">No appointments found.</td>
       </tr>
     </tbody>
   </table>

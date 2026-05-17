@@ -1,0 +1,56 @@
+<div class="page-header">
+
+  <div>
+    <h1>Doctor Details</h1>
+    <p>View doctor profile and availability</p>
+  </div>
+
+  <button class="back-btn" routerLink="/doctors">
+    ← Back
+  </button>
+
+</div>
+
+<div class="details-card" *ngIf="doctor() as d">
+
+  <div class="profile-section">
+
+    <div class="avatar-large">
+      {{ d.nom.charAt(0) }}
+    </div>
+
+    <div>
+      <h2>Dr. {{ d.nom }}</h2>
+      <p>{{ d.specialite }}</p>
+    </div>
+
+  </div>
+
+  <div class="details-grid">
+
+    <div class="detail-item">
+      <label>Full Name</label>
+      <span>Dr. {{ d.nom }}</span>
+    </div>
+
+    <div class="detail-item">
+      <label>Specialty</label>
+      <span>{{ d.specialite }}</span>
+    </div>
+
+    <div class="detail-item">
+      <label>Availability</label>
+
+      <span
+        class="status-badge"
+        [class.available]="d.disponibilite"
+        [class.unavailable]="!d.disponibilite">
+
+        {{ d.disponibilite ? 'Available' : 'Unavailable' }}
+
+      </span>
+    </div>
+
+  </div>
+
+</div>
